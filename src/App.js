@@ -1,58 +1,42 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col, Container } from 'react-bootstrap';
-import { Hasil, ListCategory, NavbarComponent, Menus } from "./components"
 import React, { Component } from 'react'
-import { API_URL } from "./utils/constans";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { NavbarComponent } from './components'
+import { Home, Sukses } from './pages'
+import { createBrowserHistory } from "history";
+import { API_URL } from './utils/constans';
 import axios from 'axios';
 
 export default class App extends Component {
+
   constructor(props) {
     super(props)
-
     this.state = {
       menus: [],
     }
   }
   componentDidMount() {
-    axios.get(API_URL + "products")
+    axios.get(API_URL + "product")
       .then(res => {
         const menus = res.data;
-        this.setState({ menus });
+        this.setState({ menus: menus });
+
+
       })
       .catch(error => {
         console.log(error)
-      })
-
+      });
   }
   render() {
-    const { menus } = this.state
-    return (
-      <div className="App">
-        <NavbarComponent />
-        <div className='mt-3'>
-          <Container>
-            <Row>
-              <ListCategory />
-              <Col>
-                <h4><strong>Daftar Produk</strong></h4>
-                <hr />
-                <Row>
-                  {menus && menus.map((menu) => (
-                    <Menus
-                      key={menu.id}
-                      menu={menu}
-                    />
-                  ))}
-                </Row>
-              </Col>
-              <Hasil />
-            </Row>
-          </Container>
 
-        </div>
-      </div>
+    const menu=this.state.menus;
+    return (
+      <BrowserRouter>
+        <NavbarComponent />
+        <Routes>
+          <Route path='/' element={<Home menus={menu} />} {...this.props} />
+          <Route path='/sukses' element={<Sukses />} {...this.props} />
+        </Routes>
+      </BrowserRouter>
     )
   }
 }
-

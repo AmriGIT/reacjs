@@ -17,28 +17,32 @@ export default class ListCategory extends Component {
         super(props)
 
         this.state = {
-            categories: []
+            kategori: []
         }
     }
     componentDidMount() {
-        axios.get(API_URL + "categories")
+        axios.get(API_URL + "kategori")
             .then(res => {
-                const categories = res.data;
-                this.setState({ categories })
+                const kategori = res.data;
+                this.setState({ kategori })
             }).catch(error => {
                 console.log(error)
             })
     }
     render() {
-        const { categories } = this.state
+        const { kategori } = this.state
+        const { changeCategory, categoriYangDipilih } = this.props
         return (
             <Col md={2} mt='2'>
                 <h4><strong>Daftar Kategori</strong></h4>
                 <hr />
-                <ListGroup>
-                    {categories && categories.map((category) => (
-                        <ListGroup.Item key={category.id}>
-                            <Icon nama={category.nama} />  {category.nama}
+                <ListGroup >
+                    {kategori && kategori.map((category) => (
+                        <ListGroup.Item key={category.id} onClick={() => changeCategory(category.id)}
+                            className={categoriYangDipilih === category.id && "category_aktif"}
+                            style={{cursor: 'pointer'}}
+                        >
+                                <Icon nama={category.kategori} />  {category.kategori}
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
