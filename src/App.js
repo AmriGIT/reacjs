@@ -1,8 +1,8 @@
 // import logo from './logo.svg';
 // import './App.css';
 
-import { Header } from "./Header";
-import Navbar from "./Navbar";
+import { Header } from "./reactDasar/Header";
+import Navbar from "./reactDasar/Navbar";
 
 
 function App() {

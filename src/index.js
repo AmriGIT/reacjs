@@ -3,16 +3,19 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import StateProps from './StateProps';
-import { Map } from './Map';
-import Lifecycle from './Lifecycle.js';
+// import StateProps from './StateProps';
+// import { Map } from './Map';
+// import Lifecycle from './reactDasar/Lifecycle.js';
+import Crud from './crud'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <StateProps/> */}
     {/* <Map/> */}
-    <Lifecycle/>
+    {/* <Lifecycle/> */}
+    <Crud/>
   </React.StrictMode>
 );
 
